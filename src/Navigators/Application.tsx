@@ -6,6 +6,7 @@ import { Login, StartupContainer } from '@/Containers'
 import { useTheme } from '@/Hooks'
 import MainNavigator from './Main'
 import { navigationRef } from './utils'
+import Register from '@/Containers/RegisterContainer'
 
 const Stack = createStackNavigator()
 
@@ -23,6 +24,13 @@ const ApplicationNavigator = () => {
           <Stack.Screen
             name="Login"
             component={Login}
+            options={{
+              animationEnabled: false,
+            }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Register}
             options={{
               animationEnabled: false,
             }}
