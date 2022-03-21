@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react'
 import { ActivityIndicator, View, Text } from 'react-native'
 import { useTranslation } from 'react-i18next'
-import { useTheme } from '@/Hooks'
 import { Brand } from '@/Components'
 import { setDefaultTheme } from '@/Store/Theme'
 import { navigateAndSimpleReset } from '@/Navigators/utils'
 
 const StartupContainer = () => {
-  const { Layout, Gutters, Fonts } = useTheme()
+  // const { Layout, Gutters, Fonts } = useTheme()
 
   const { t } = useTranslation()
 
@@ -18,7 +17,7 @@ const StartupContainer = () => {
       }, 2000),
     )
     await setDefaultTheme({ theme: 'default', darkMode: null })
-    navigateAndSimpleReset('Register')
+    navigateAndSimpleReset('Login')
   }
 
   useEffect(() => {
@@ -26,10 +25,10 @@ const StartupContainer = () => {
   })
 
   return (
-    <View style={[Layout.fill, Layout.colCenter]}>
+    <View>
       <Brand />
-      <ActivityIndicator size={'large'} style={[Gutters.largeVMargin]} />
-      <Text style={Fonts.textCenter}>{t('welcome')}</Text>
+      <ActivityIndicator size={'large'} />
+      <Text >{t('welcome')}</Text>
     </View>
   )
 }

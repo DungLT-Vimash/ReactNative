@@ -3,7 +3,6 @@ import { SafeAreaView, StatusBar } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
 import { Login, StartupContainer } from '@/Containers'
-import { useTheme } from '@/Hooks'
 import MainNavigator from './Main'
 import { navigationRef } from './utils'
 import Register from '@/Containers/RegisterContainer'
@@ -12,13 +11,12 @@ const Stack = createStackNavigator()
 
 // @refresh reset
 const ApplicationNavigator = () => {
-  const { Layout, darkMode, NavigationTheme } = useTheme()
-  const { colors } = NavigationTheme
+  // const { Layout, darkMode, NavigationTheme } = useTheme()
 
   return (
-    <SafeAreaView style={[Layout.fill, { backgroundColor: colors.card }]}>
-      <NavigationContainer theme={NavigationTheme} ref={navigationRef}>
-        <StatusBar barStyle={darkMode ? 'light-content' : 'dark-content'} />
+    <SafeAreaView >
+      <NavigationContainer  ref={navigationRef}>
+        <StatusBar  />
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Startup" component={StartupContainer} />
           <Stack.Screen

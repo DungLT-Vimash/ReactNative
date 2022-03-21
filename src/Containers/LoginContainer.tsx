@@ -1,13 +1,18 @@
 import React, { useState } from 'react'
 import { Image, KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View, Keyboard } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native';
 
-const Login = () => {
-   //states for validating
-   const [errorEmail, setErrorEmail] = useState('')
-   const [errorPassword, setErrorPassword] = useState('')
-   //states to store email/password
-   const [email, setEmail] = useState('baluu8njdf@gmail.com')
-   const [password, setPassword] = useState('123456Abc')
+export interface Props {
+  navigation: any;
+}
+
+const Login = ({navigation}: Props) => {
+  //states for validating
+  const [errorEmail, setErrorEmail] = useState('')
+  const [errorPassword, setErrorPassword] = useState('')
+  //states to store email/password
+  const [email, setEmail] = useState('baluu8njdf@gmail.com')
+  const [password, setPassword] = useState('123456Abc')
   return (
     <KeyboardAvoidingView style={{ flex: 100, backgroundColor: 'white' }}>
       <View
@@ -57,17 +62,17 @@ const Login = () => {
             Email:
           </Text>
           <TextInput
-           onChangeText={(text)=>{
-          //  setErrorEmail(isValidEmail(text) == true ? 
-          //               '' : 'Email not in correct format')
-           setEmail(text)    
-        }}
+            onChangeText={(text) => {
+              //  setErrorEmail(isValidEmail(text) == true ? 
+              //               '' : 'Email not in correct format')
+              setEmail(text)
+            }}
             style={{
               color: 'black',
             }}
             placeholder="example@gmail.com"
           />
-          
+
           <View
             style={{
               height: 1,
@@ -85,78 +90,78 @@ const Login = () => {
               marginBottom: 15,
             }}
           ></Text>
-          </View>
-          <View
+        </View>
+        <View
+          style={{
+            marginHorizontal: 15,
+          }}
+        >
+          <Text
             style={{
-              marginHorizontal: 15,
+              fontSize: 12,
+              color: '#ED6263',
             }}
           >
-            <Text
-              style={{
-                fontSize: 12,
-                color: '#ED6263',
-              }}
-            >
-              Password:
-            </Text>
-            <TextInput
-              style={{
-                color: 'black',
-              }}
-              secureTextEntry={true}
-              placeholder="Enter your password"
-              placeholderTextColor="rgba(0,0,0,0.6)"
-            />
-            <View
-              style={{
-                height: 1,
-                backgroundColor: '#ED6263',
-                width: '100%',
-                marginBottom: 15,
-                marginHorizontal: 15,
-                alignSelf: 'center',
-              }}
-            />
-            <Text
-              style={{
-                color: 'red',
-                fontSize: 12,
-                marginBottom: 15,
-              }}
-            >
-            </Text>
-          </View>
+            Password:
+          </Text>
+          <TextInput
+            style={{
+              color: 'black',
+            }}
+            secureTextEntry={true}
+            placeholder="Enter your password"
+            placeholderTextColor="rgba(0,0,0,0.6)"
+          />
+          <View
+            style={{
+              height: 1,
+              backgroundColor: '#ED6263',
+              width: '100%',
+              marginBottom: 15,
+              marginHorizontal: 15,
+              alignSelf: 'center',
+            }}
+          />
+          <Text
+            style={{
+              color: 'red',
+              fontSize: 12,
+              marginBottom: 15,
+            }}
+          >
+          </Text>
         </View>
-        <View style={{
-            flex: 15
-        }}>
-          <TouchableOpacity
-                style={{
-                    backgroundColor: '#ED6263',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: '50%',
-                    alignSelf: 'center',
-                    borderRadius: 18
-                }}>
-                <Text style={{
-                    padding: 8,
-                    fontSize: 14,
-                    color: 'white'
-                }}>Login</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-               
-                style={{ padding: 5 }}>
-                <Text style={{
-                    padding: 8,
-                    fontSize: 12,
-                    color: '#ED6263',
-                    alignSelf: 'center',
-                }}>New user? Register now</Text>
-            </TouchableOpacity>
-        </View>
-      
+      </View>
+      <View style={{
+        flex: 15
+      }}>
+        <TouchableOpacity
+          style={{
+            backgroundColor: '#ED6263',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '50%',
+            alignSelf: 'center',
+            borderRadius: 18
+          }}>
+          <Text style={{
+            padding: 8,
+            fontSize: 14,
+            color: 'white'
+          }}>Login</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Register')}
+          style={{ padding: 5 }}>
+          <Text style={{
+            padding: 8,
+            fontSize: 12,
+            color: '#ED6263',
+            alignSelf: 'center',
+          }}>New user? Register now</Text>
+        </TouchableOpacity>
+      </View>
+
     </KeyboardAvoidingView>
   )
 }
