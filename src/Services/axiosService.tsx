@@ -48,7 +48,7 @@ request_auth.interceptors.response.use(undefined, async err => {
             isRefreshing = true;
             axios
                 .post(`${API_ENDPOINT_AUTH}/auth/refreshToken`, {
-                    refreshToken: await AsyncStorage.getItem('refreshToken'),
+                    // refreshToken: await AsyncStorage.getItem('refreshToken'),
                 })
                 .then(respaonse => {
                     const { data } = respaonse;
@@ -69,23 +69,23 @@ request_auth.interceptors.response.use(undefined, async err => {
     return Promise.reject(err);
 });
 
-const _refreshToken = async () => {
-    try {
-        if ( await AsyncStorage.getItem('token')) {
-            setInterval(async () => {
-                axios
-                    .post(`${API_ENDPOINT_AUTH}/auth/refreshToken`, {
-                        refreshToken: await AsyncStorage.getItem('refreshToken'),
-                    })
-                    .then(respaonse => {
-                        const { data } = respaonse;
-                        saveToken(data.refresh_token, data.access_token);
-                    });
-            }, 120000);
-        }
-    } catch (error) {
-      // Error retrieving data
-    }
-  };
-  _refreshToken;
+// const _refreshToken = async () => {
+//     try {
+//         if ( await AsyncStorage.getItem('token')) {
+//             setInterval(async () => {
+//                 axios
+//                     .post(`${API_ENDPOINT_AUTH}/auth/refreshToken`, {
+//                         refreshToken: await AsyncStorage.getItem('refreshToken'),
+//                     })
+//                     .then(respaonse => {
+//                         const { data } = respaonse;
+//                         saveToken(data.refresh_token, data.access_token);
+//                     });
+//             }, 120000);
+//         }
+//     } catch (error) {
+//       // Error retrieving data
+//     }
+//   };
+//   _refreshToken;
 export default request_auth;

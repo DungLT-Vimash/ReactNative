@@ -29,8 +29,8 @@ export const { changeTheme, setDefaultTheme } = slice.actions
 export default slice.reducer
 
 export type ThemeState = {
-  theme: 'default' | null | undefined
-  darkMode: boolean | null | undefined
+  theme: 'default' | null | undefined | false
+  darkMode: boolean | null | undefined | false
 }
 
 type ThemePayload = {

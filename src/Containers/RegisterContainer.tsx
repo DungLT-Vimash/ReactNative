@@ -1,13 +1,31 @@
 import React, { useState } from 'react'
 import { Image, KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View, Keyboard, FlatList, ScrollView } from 'react-native'
+import { handleRegister, selectRegister, RegisterInterface } from '../Store/Register/index'
+import { useAppSelector } from '../Store/hooks'
+import { useDispatch } from 'react-redux';
 
-const Register = () => {
+export interface Props {
+    navigation: any;
+}
+
+const Register = ({ navigation }: Props) => {
     //states for validating
     const [errorEmail, setErrorEmail] = useState('')
     const [errorPassword, setErrorPassword] = useState('')
-    //states to store email/password
-    const [email, setEmail] = useState('baluu8njdf@gmail.com')
-    const [password, setPassword] = useState('123456Abc')
+    const [email, setEmail] = useState('')
+    const [user, setUser] = useState('')
+    const [password, setPassword] = useState('')
+    const dispatch = useDispatch();
+    const registerSelector = useAppSelector(selectRegister);
+    const temp: RegisterInterface = {
+        username: user,
+        password: password,
+        email: email
+    };
+    const register = () => {
+        dispatch(handleRegister(temp));
+        // console.log(temp)
+    }
     return (
 
         <ScrollView style={{ flex: 100, backgroundColor: 'white' }}>
@@ -61,7 +79,7 @@ const Register = () => {
                         onChangeText={(text) => {
                             //  setErrorEmail(isValidEmail(text) == true ? 
                             //               '' : 'Email not in correct format')
-                            setEmail(text)
+                            setUser(text)
                         }}
                         style={{
                             color: 'black',
@@ -150,6 +168,9 @@ const Register = () => {
                         secureTextEntry={true}
                         placeholder="Enter your password"
                         placeholderTextColor="rgba(0,0,0,0.6)"
+                        onChangeText={(text) => {
+                            setPassword(text)
+                        }}
                     />
                     <View
                         style={{
@@ -182,12 +203,28 @@ const Register = () => {
                         width: '50%',
                         alignSelf: 'center',
                         borderRadius: 18
-                    }}>
+                    }}
+                    onPress={() => {
+                        // console.log(`Email = ${email}, password = ${password}`);
+                        register()
+
+                    }}
+                >
                     <Text style={{
                         padding: 8,
                         fontSize: 14,
                         color: 'white'
                     }}>Register</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Login')}
+                    style={{ padding: 5 }}>
+                    <Text style={{
+                        padding: 8,
+                        fontSize: 12,
+                        color: '#ED6263',
+                        alignSelf: 'center',
+                    }}>Login</Text>
                 </TouchableOpacity>
             </View>
 

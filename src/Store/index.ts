@@ -10,15 +10,21 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist'
-import { configureStore } from '@reduxjs/toolkit'
+import {
+  configureStore, ThunkAction,
+  Action,
+  getDefaultMiddleware,
+} from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
+import registerReducer from './Register/index';
+
 
 import { api } from '@/Services/api'
 import * as modules from '@/Services/modules'
 import theme from './Theme'
 
 const reducers = combineReducers({
-  theme,
+  theme,registerReducer,
   ...Object.values(modules).reduce(
     (acc, module) => ({
       ...acc,
@@ -35,6 +41,7 @@ const persistConfig = {
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)
+
 
 const store = configureStore({
   reducer: persistedReducer,
@@ -59,3 +66,11 @@ const persistor = persistStore(store)
 setupListeners(store.dispatch)
 
 export { store, persistor }
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
